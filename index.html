@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คำไทยตรวจทาน - Thai Word Checker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔍 คำไทยตรวจทาน</h1>
+            <p class="subtitle">Real-time Thai Language Checker</p>
+        </header>
+
+        <main>
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="editor-wrapper">
+                    <label for="textInput">พิมพ์ข้อความของคุณที่นี่:</label>
+                    <textarea 
+                        id="textInput" 
+                        class="text-editor" 
+                        placeholder="เขียนอีเมล เอกสาร หรือข้อความของคุณที่นี่ ระบบจะตรวจสอบแบบ real-time..."
+                        rows="10"
+                    ></textarea>
+                </div>
+
+                <div class="suggestions-count">
+                    <span id="suggestionCount" class="badge">0 ข้อเสนอแนะ</span>
+                </div>
+            </section>
+
+            <!-- Suggestions Display -->
+            <section class="suggestions-section">
+                <h2>📋 ข้อเสนอแนะ</h2>
+                <div id="suggestionsList" class="suggestions-list">
+                    <p class="empty-state">ยังไม่มีข้อเสนอแนะ - เริ่มพิมพ์เลย</p>
+                </div>
+            </section>
+
+            <!-- Reference & Data Source -->
+            <section class="reference-section">
+                <h3>📚 แหล่งข้อมูลอ้างอิง</h3>
+                <div class="reference-info">
+                    <div class="reference-badge verified">
+                        <span class="icon">✓</span>
+                        ราชบัณฑิตยสถาน Open Data
+                    </div>
+                    <div class="reference-badge ai-suggested">
+                        <span class="icon">⚡</span>
+                        AI แนะนำ (ต้องตรวจสอบเพิ่มเติม)
+                    </div>
+                </div>
+            </section>
+
+            <!-- Statistics -->
+            <section class="stats-section">
+                <h3>📊 สถิติการใช้งาน</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalChecks">0</div>
+                        <div class="stat-label">ครั้งที่ตรวจสอบ</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="acceptedRate">0%</div>
+                        <div class="stat-label">อัตราการยอมรับคำแนะนำ</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="wordCount">0</div>
+                        <div class="stat-label">จำนวนคำทั้งหมด</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Actions -->
+            <section class="actions-section">
+                <button id="copyBtn" class="btn btn-primary">📋 คัดลอกข้อความที่แก้ไข</button>
+                <button id="clearBtn" class="btn btn-secondary">🗑️ ล้างข้อมูลทั้งหมด</button>
+                <button id="exportBtn" class="btn btn-secondary">📥 ส่งออก Report</button>
+            </section>
+        </main>
+
+        <footer>
+            <p>🚀 MVP Phase 1 - สำหรับการประกวด "เปิดคลังคำ พลิกคลังคิด"</p>
+            <p class="footer-note">ข้อมูลการใช้งานจะเก็บแบบไม่ระบุตัวตนเพื่อปรับปรุง AI ที่ตอบสนองต่อบริบทภาษาไทย</p>
+        </footer>
+    </div>
+
+    <!-- Suggestion Detail Modal -->
+    <div id="suggestionModal" class="modal hidden">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-header">
+                <h3 id="modalTitle">ข้อเสนอแนะ</h3>
+                <span id="modalSource" class="modal-badge"></span>
+            </div>
+            <div class="modal-body">
+                <div class="original-word">
+                    <strong>คำเดิม:</strong> <span id="modalOriginal"></span>
+                </div>
+                <div class="suggested-words">
+                    <strong>คำแนะนำ:</strong>
+                    <div id="modalSuggested"></div>
+                </div>
+                <div class="explanation">
+                    <strong>เหตุผล:</strong> <span id="modalReason"></span>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button id="acceptSuggestion" class="btn btn-primary">✓ ยอมรับ</button>
+                <button id="rejectSuggestion" class="btn btn-secondary">✗ ปฏิเสธ</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
